@@ -1,0 +1,142 @@
+  backbone.bottom_up.res2.0.conv1.quant_activation.clip_val,  }
+  backbone.bottom_up.res2.0.conv1.quant_weight.clip_val}
+  backbone.bottom_up.res2.0.conv2.quant_activation.clip_val}
+  backbone.bottom_up.res2.0.conv2.quant_weight.clip_val}
+  backbone.bottom_up.res2.1.conv1.quant_activation.clip_val, }
+  backbone.bottom_up.res2.1.conv1.quant_weight.clip_val}
+  backbone.bottom_up.res2.1.conv2.quant_activation.clip_val}
+  backbone.bottom_up.res2.1.conv2.quant_weight.{  clip_val}
+  backbone.bottom_up.res3.0.conv1.quant_activation.{ clip_val, }
+  backbone.bottom_up.res3.0.conv1.quant_weight.{  clip_val}
+  backbone.bottom_up.res3.0.conv2.quant_activation.{ clip_val, }
+  backbone.bottom_up.res3.0.conv2.quant_weight.{clip_val,  }
+  backbone.bottom_up.res3.0.shortcut.quant_activation.{clip_val,  }
+  backbone.bottom_up.res3.0.shortcut.quant_weight.{ clip_val, }
+  backbone.bottom_up.res3.1.conv1.quant_activation.{clip_val,  }
+  backbone.bottom_up.res3.1.conv1.quant_weight.{  clip_val}
+  backbone.bottom_up.res3.1.conv2.quant_activation.{clip_val,  }
+  backbone.bottom_up.res3.1.conv2.quant_weight.{ clip_val, }
+  backbone.bottom_up.res4.0.conv1.quant_activation.{clip_val,  }
+  backbone.bottom_up.res4.0.conv1.quant_weight.{ clip_val, }
+  backbone.bottom_up.res4.0.conv2.quant_activation.{ clip_val, }
+  backbone.bottom_up.res4.0.conv2.quant_weight.{  clip_val}
+  backbone.bottom_up.res4.0.shortcut.quant_activation.{ clip_val, }
+  backbone.bottom_up.res4.0.shortcut.quant_weight.{clip_val,  }
+  backbone.bottom_up.res4.1.conv1.quant_activation.{  clip_val}
+  backbone.bottom_up.res4.1.conv1.quant_weight.{clip_val,  }
+  backbone.bottom_up.res4.1.conv2.quant_activation.{clip_val,  }
+  backbone.bottom_up.res4.1.conv2.quant_weight.{clip_val,  }
+  backbone.bottom_up.res5.0.conv1.quant_activation.{clip_val,  }
+  backbone.bottom_up.res5.0.conv1.quant_weight.{ clip_val, }
+  backbone.bottom_up.res5.0.conv2.quant_activation.{clip_val,  }
+  backbone.bottom_up.res5.0.conv2.quant_weight.{  clip_val}
+  backbone.bottom_up.res5.0.shortcut.quant_activation.{  clip_val}
+  backbone.bottom_up.res5.0.shortcut.quant_weight.{clip_val,  }
+  backbone.bottom_up.res5.1.conv1.quant_activation.{ clip_val, }
+  backbone.bottom_up.res5.1.conv1.quant_weight.{clip_val,  }
+  backbone.bottom_up.res5.1.conv2.quant_activation.{ clip_val, }
+  backbone.bottom_up.res5.1.conv2.quant_weight.{ clip_val, }
+
+  backbone.fpn_lateral3.norm.0.{running_var, running_mean, bias, weight}
+  backbone.fpn_lateral3.quant_activation.{clip_val,  }
+  backbone.fpn_lateral3.quant_weight.{clip_val,  }
+  backbone.fpn_lateral4.norm.0.{running_mean, running_var, weight, bias}
+  backbone.fpn_lateral4.quant_activation.{  clip_val}
+  backbone.fpn_lateral4.quant_weight.{clip_val,  }
+  backbone.fpn_lateral5.norm.0.{running_mean, weight, bias, running_var}
+  backbone.fpn_lateral5.quant_activation.{ clip_val, }
+  backbone.fpn_lateral5.quant_weight.{clip_val,  }
+  backbone.fpn_output3.norm.0.{running_mean, bias, weight, running_var}
+  backbone.fpn_output3.quant_activation.{ clip_val, }
+  backbone.fpn_output3.quant_weight.{clip_val,  }
+  backbone.fpn_output4.norm.0.{weight, running_mean, running_var, bias}
+  backbone.fpn_output4.quant_activation.{clip_val,  }
+  backbone.fpn_output4.quant_weight.{clip_val,  }
+  backbone.fpn_output5.norm.0.{running_var, weight, running_mean, bias}
+  backbone.fpn_output5.quant_activation.{clip_val,  }
+  backbone.fpn_output5.quant_weight.{clip_val,  }
+  backbone.top_block.p6.norm.0.{running_var, running_mean, weight, bias}
+  backbone.top_block.p6.quant_activation.{  clip_val}
+  backbone.top_block.p6.quant_weight.{  clip_val}
+  backbone.top_block.p7.norm.0.{running_mean, weight, running_var, bias}
+  backbone.top_block.p7.quant_activation.{  clip_val}
+  backbone.top_block.p7.quant_weight.{clip_val,  }
+
+  proposal_generator.fcos_head.bbox_tower.1.0.{running_var, weight, bias, running_mean}
+  proposal_generator.fcos_head.bbox_tower.1.1.{running_mean, bias, weight, running_var}
+  proposal_generator.fcos_head.bbox_tower.1.2.{running_var, weight, running_mean, bias}
+  proposal_generator.fcos_head.bbox_tower.1.3.{running_mean, running_var, bias, weight}
+  proposal_generator.fcos_head.bbox_tower.1.4.{running_mean, running_var, weight, bias}
+
+  proposal_generator.fcos_head.bbox_tower.4.0.{running_var, weight, bias, running_mean}
+  proposal_generator.fcos_head.bbox_tower.4.1.{weight, running_var, running_mean, bias}
+  proposal_generator.fcos_head.bbox_tower.4.2.{running_mean, running_var, weight, bias}
+  proposal_generator.fcos_head.bbox_tower.4.3.{weight, running_mean, bias, running_var}
+  proposal_generator.fcos_head.bbox_tower.4.4.{bias, running_var, running_mean, weight}
+  proposal_generator.fcos_head.bbox_tower.7.0.{bias, running_mean, running_var, weight}
+  proposal_generator.fcos_head.bbox_tower.7.1.{running_mean, bias, running_var, weight}
+  proposal_generator.fcos_head.bbox_tower.7.2.{running_var, bias, weight, running_mean}
+  proposal_generator.fcos_head.bbox_tower.7.3.{running_mean, weight, bias, running_var}
+  proposal_generator.fcos_head.bbox_tower.7.4.{running_var, bias, weight, running_mean}
+  proposal_generator.fcos_head.bbox_tower.10.0.{weight, running_var, running_mean, bias}
+  proposal_generator.fcos_head.bbox_tower.10.1.{bias, running_var, weight, running_mean}
+  proposal_generator.fcos_head.bbox_tower.10.2.{running_var, weight, bias, running_mean}
+  proposal_generator.fcos_head.bbox_tower.10.3.{running_mean, bias, weight, running_var}
+  proposal_generator.fcos_head.bbox_tower.10.4.{running_mean, weight, bias, running_var}
+
+  proposal_generator.fcos_head.bbox_tower.0.{bia}s
+  proposal_generator.fcos_head.bbox_tower.3.{bia}s
+  proposal_generator.fcos_head.bbox_tower.6.{bia}s
+  proposal_generator.fcos_head.bbox_tower.9.{bia}s
+
+  proposal_generator.fcos_head.bbox_tower.0.quant_activation.{  clip_val}
+  proposal_generator.fcos_head.bbox_tower.0.quant_weight.{  clip_val}
+  proposal_generator.fcos_head.bbox_tower.3.quant_activation.{  clip_val}
+  proposal_generator.fcos_head.bbox_tower.3.quant_weight.{ clip_val, }
+  proposal_generator.fcos_head.bbox_tower.6.quant_activation.{clip_val,  }
+  proposal_generator.fcos_head.bbox_tower.6.quant_weight.{  clip_val}
+  proposal_generator.fcos_head.bbox_tower.9.quant_activation.{  clip_val}
+  proposal_generator.fcos_head.bbox_tower.9.quant_weight.{clip_val,  }
+
+  proposal_generator.fcos_head.cls_tower.1.0.{running_mean, bias, weight, running_var}
+  proposal_generator.fcos_head.cls_tower.1.1.{bias, running_mean, weight, running_var}
+  proposal_generator.fcos_head.cls_tower.1.2.{weight, running_mean, bias, running_var}
+  proposal_generator.fcos_head.cls_tower.1.3.{running_mean, running_var, bias, weight}
+  proposal_generator.fcos_head.cls_tower.1.4.{running_mean, running_var, weight, bias}
+  proposal_generator.fcos_head.cls_tower.4.0.{running_var, weight, running_mean, bias}
+  proposal_generator.fcos_head.cls_tower.4.1.{running_var, bias, weight, running_mean}
+  proposal_generator.fcos_head.cls_tower.4.2.{weight, bias, running_mean, running_var}
+  proposal_generator.fcos_head.cls_tower.4.3.{running_mean, bias, running_var, weight}
+  proposal_generator.fcos_head.cls_tower.4.4.{running_mean, weight, running_var, bias}
+  proposal_generator.fcos_head.cls_tower.7.0.{weight, bias, running_mean, running_var}
+  proposal_generator.fcos_head.cls_tower.7.1.{running_var, running_mean, weight, bias}
+  proposal_generator.fcos_head.cls_tower.7.2.{running_var, weight, bias, running_mean}
+  proposal_generator.fcos_head.cls_tower.7.3.{running_var, running_mean, bias, weight}
+  proposal_generator.fcos_head.cls_tower.7.4.{weight, running_var, running_mean, bias}
+  proposal_generator.fcos_head.cls_tower.10.0.{running_var, running_mean, bias, weight}
+  proposal_generator.fcos_head.cls_tower.10.1.{weight, running_mean, running_var, bias}
+  proposal_generator.fcos_head.cls_tower.10.2.{running_var, weight, bias, running_mean}
+  proposal_generator.fcos_head.cls_tower.10.3.{weight, bias, running_var, running_mean}
+  proposal_generator.fcos_head.cls_tower.10.4.{running_var, weight, running_mean, bias}
+
+  proposal_generator.fcos_head.cls_tower.0.{bia}s
+  proposal_generator.fcos_head.cls_tower.3.{bia}s
+  proposal_generator.fcos_head.cls_tower.6.{bia}s
+  proposal_generator.fcos_head.cls_tower.9.{bia}s
+
+  proposal_generator.fcos_head.cls_tower.0.quant_activation.{clip_val,  }
+  proposal_generator.fcos_head.cls_tower.0.quant_weight.{clip_val,  }
+  proposal_generator.fcos_head.cls_tower.3.quant_activation.{clip_val,  }
+  proposal_generator.fcos_head.cls_tower.3.quant_weight.{clip_val,  }
+  proposal_generator.fcos_head.cls_tower.6.quant_activation.{ clip_val, }
+  proposal_generator.fcos_head.cls_tower.6.quant_weight.{clip_val,  }
+  proposal_generator.fcos_head.cls_tower.9.quant_activation.{ clip_val, }
+  proposal_generator.fcos_head.cls_tower.9.quant_weight.{  clip_val}
+
+  proposal_generator.fcos_head.ctrness.{bias, weight}
+
+  #proposal_generator.fcos_head.scales.0.scale
+  #proposal_generator.fcos_head.scales.1.scale
+  #proposal_generator.fcos_head.scales.2.scale
+  #proposal_generator.fcos_head.scales.3.scale
+  #proposal_generator.fcos_head.scales.4.scale
