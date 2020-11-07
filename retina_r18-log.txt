@@ -1,0 +1,1242 @@
+[11/07 08:13:06] detectron2 INFO: Rank of current process: 0. World size: 1
+[11/07 08:13:07] detectron2 INFO: Environment info:
+----------------------  ---------------------------------------------------------------------------------------
+sys.platform            linux
+Python                  3.7.2 (default, Dec 29 2018, 06:19:36) [GCC 7.3.0]
+numpy                   1.19.3
+detectron2              0.2.1 @/home/liujing/workspace/git/detectron2/detectron2
+Compiler                GCC 5.4
+CUDA compiler           CUDA 10.2
+detectron2 arch flags   5.2
+DETECTRON2_ENV_MODULE   <not set>
+PyTorch                 1.6.0 @/home/liujing/anaconda3/envs/chenp-3.7.2/lib/python3.7/site-packages/torch
+PyTorch debug build     False
+GPU available           True
+GPU 0,1,2,3             GeForce GTX TITAN X (arch=5.2)
+CUDA_HOME               /usr/local/cuda-10.2
+Pillow                  8.0.1
+torchvision             0.7.0 @/home/liujing/anaconda3/envs/chenp-3.7.2/lib/python3.7/site-packages/torchvision
+torchvision arch flags  3.5, 5.0, 6.0, 7.0, 7.5
+fvcore                  0.1.2.post20201030
+cv2                     4.4.0
+----------------------  ---------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) Math Kernel Library Version 2019.0.5 Product Build 20190808 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v1.5.0 (Git Hash e2ac1fac44c5078ca927cb9b90e1b3066a0b2ed0)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 10.2
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75
+  - CuDNN 7.6.5
+  - Magma 2.5.2
+  - Build settings: BLAS=MKL, BUILD_TYPE=Release, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DUSE_VULKAN_WRAPPER -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, USE_CUDA=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_STATIC_DISPATCH=OFF, 
+
+[11/07 08:13:07] detectron2 INFO: Command line arguments: Namespace(config_file='configs/COCO-Detection/retinanet_R_18_FPN_1x-Full-SyncBN-lsq-2bit.yaml', dist_url='tcp://127.0.0.1:50157', eval_only=True, machine_rank=0, num_gpus=1, num_machines=1, opts=['MODEL.WEIGHTS', 'pretrained/retinanet/retinanet_R_18_1x_Full_BN_dorefa_clip_2bit_no_lp_pretrained/model_final.pth'], resume=False)
+[11/07 08:13:07] detectron2 INFO: Contents of args.config_file=configs/COCO-Detection/retinanet_R_18_FPN_1x-Full-SyncBN-lsq-2bit.yaml:
+_BASE_: "../Base-RetinaNet.yaml"
+MODEL:
+  WEIGHTS: "weights/det-resnet18/official-r18.pth.raw"
+  #PIXEL_MEAN: [104.0, 116.0, 124.0]
+  RESNETS:
+    DEPTH: 18
+    RES2_OUT_CHANNELS: 64
+    NORM: "SyncBN"
+    STRIDE_IN_1X1: False
+  BACKBONE:
+    FREEZE_AT: 0
+  FPN:
+    NORM: "SyncBN"
+    USE_RELU: True
+  RETINANET:
+    NORM: "SyncBN"
+  QUANTIZATION:
+    scope: [
+            # backbone
+            'backbone',
+            # Head
+            'head',
+           ]
+    keyword: ["debug", "dorefa", "lsq"]
+    fm_enable: True 
+    wt_enable: True 
+    padding_after_quant: True
+    fm_bit: 2.0
+    wt_bit: 2.0
+    fm_boundary: 1.0
+    wt_boundary: 1.0
+    wt_quant_group: 1
+    wt_adaptive: "var-mean"
+    #policy: 'configs/FCOS-Detection/policy-fcos-r18-fixpoint.txt'
+SOLVER:
+  BASE_LR: 0.002  # decrease by 5
+OUTPUT_DIR: output/coco-detection/retinanet_R_18_FPN_1x-Full_SyncBN-lsq-2bit
+
+[11/07 08:13:07] detectron2 INFO: Running with full config:
+CUDNN_BENCHMARK: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  FILTER_EMPTY_ANNOTATIONS: True
+  NUM_WORKERS: 4
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: ()
+  PROPOSAL_FILES_TRAIN: ()
+  TEST: ('coco_2017_val',)
+  TRAIN: ('coco_2017_train',)
+DEBUG: False
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  CROP:
+    ENABLED: False
+    SIZE: [0.9, 0.9]
+    TYPE: relative_range
+  FORMAT: BGR
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 1333
+  MAX_SIZE_TRAIN: 1333
+  MIN_SIZE_TEST: 800
+  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TRAIN_SAMPLING: choice
+  RANDOM_FLIP: horizontal
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES: [[-90, 0, 90]]
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES: [[32, 40.31747359663594, 50.79683366298238], [64, 80.63494719327188, 101.59366732596476], [128, 161.26989438654377, 203.18733465192952], [256, 322.53978877308754, 406.37466930385904], [512, 645.0795775461751, 812.7493386077181]]
+  BACKBONE:
+    FREEZE_AT: 0
+    NAME: build_retinanet_resnet_fpn_backbone
+  DEVICE: cuda
+  EXTRA_WEIGHTS: 
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: ['res3', 'res4', 'res5']
+    NORM: SyncBN
+    OUT_CHANNELS: 256
+    USE_RELU: True
+  KEYPOINT_ON: False
+  LOAD_PROPOSALS: False
+  MASK_ON: False
+  META_ARCHITECTURE: RetinaNet
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: True
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN: [103.53, 116.28, 123.675]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: RPN
+  QUANTIZATION:
+    fm_adaptive: none
+    fm_bit: 2.0
+    fm_boundary: 1.0
+    fm_enable: True
+    fm_grad_type: none
+    fm_half_range: True
+    fm_level: 0
+    fm_quant_group: 0
+    fm_ratio: 1.0
+    fm_scale: 0.5
+    fm_separator: 0.38
+    global_buffer:
+      
+    keyword: ['debug', 'dorefa', 'lsq']
+    padding_after_quant: True
+    policy: 
+    probe_list: []
+    progressive:
+      enable: False
+      fm_end_bit: 2.0
+      fm_start_bit: 16.0
+      scope: ['']
+      wt_end_bit: 2.0
+      wt_start_bit: 16.0
+    scope: ['backbone', 'head']
+    stable: 0
+    wt_adaptive: var-mean
+    wt_bit: 2.0
+    wt_boundary: 1.0
+    wt_enable: True
+    wt_grad_type: none
+    wt_half_range: False
+    wt_level: 0
+    wt_quant_group: 1
+    wt_ratio: 1.0
+    wt_scale: 0.5
+    wt_separator: 0.38
+  RESNETS:
+    DEFORM_MODULATED: False
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE: [False, False, False, False]
+    DEPTH: 18
+    NORM: SyncBN
+    NUM_GROUPS: 1
+    OUT_FEATURES: ['res3', 'res4', 'res5']
+    RES2_OUT_CHANNELS: 64
+    RES5_DILATION: 1
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: False
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES: ['p3', 'p4', 'p5', 'p6', 'p7']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.4, 0.5]
+    NMS_THRESH_TEST: 0.5
+    NORM: SyncBN
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.0
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS: ((10.0, 10.0, 5.0, 5.0), (20.0, 20.0, 10.0, 10.0), (30.0, 30.0, 15.0, 15.0))
+    IOUS: (0.5, 0.6, 0.7)
+  ROI_BOX_HEAD:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    CLS_AGNOSTIC_BBOX_REG: False
+    CONV_DIM: 256
+    FC_DIM: 1024
+    NAME: 
+    NORM: 
+    NUM_CONV: 0
+    NUM_FC: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 512
+    IN_FEATURES: ['res4']
+    IOU_LABELS: [0, 1]
+    IOU_THRESHOLDS: [0.5]
+    NAME: Res5ROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: True
+    SCORE_THRESH_TEST: 0.05
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS: (512, 512, 512, 512, 512, 512, 512, 512)
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: True
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: False
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: 
+    NUM_CONV: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    BOUNDARY_THRESH: -1
+    HEAD_NAME: StandardRPNHead
+    HEAD_NORM: 
+    IN_FEATURES: ['res4']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.3, 0.7]
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 1000
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 6000
+    PRE_NMS_TOPK_TRAIN: 12000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    COMMON_STRIDE: 4
+    CONVS_DIM: 128
+    IGNORE_VALUE: 255
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    LOSS_WEIGHT: 1.0
+    NAME: SemSegFPNHead
+    NORM: GN
+    NUM_CLASSES: 54
+  WEIGHTS: pretrained/retinanet/retinanet_R_18_1x_Full_BN_dorefa_clip_2bit_no_lp_pretrained/model_final.pth
+  apex_sync_bn: False
+  fp16: False
+OUTPUT_DIR: output/coco-detection/retinanet_R_18_FPN_1x-Full_SyncBN-lsq-2bit
+SEED: -1
+SOLVER:
+  BASE_LR: 0.002
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 5000
+  CLIP_GRADIENTS:
+    CLIP_TYPE: value
+    CLIP_VALUE: 1.0
+    ENABLED: False
+    NORM_TYPE: 2.0
+  GAMMA: 0.1
+  IMS_PER_BATCH: 16
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 90000
+  MOMENTUM: 0.9
+  NESTEROV: False
+  PRINT_PERIOD: 20
+  REFERENCE_WORLD_SIZE: 0
+  STEPS: (60000, 80000)
+  WARMUP_FACTOR: 0.001
+  WARMUP_ITERS: 1000
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: False
+    FLIP: True
+    MAX_SIZE: 4000
+    MIN_SIZES: (400, 500, 600, 700, 800, 900, 1000, 1100, 1200)
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 0
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: False
+    NUM_ITER: 200
+VERSION: 2
+VIS_PERIOD: 0
+[11/07 08:13:07] detectron2 INFO: Full config saved to output/coco-detection/retinanet_R_18_FPN_1x-Full_SyncBN-lsq-2bit/config.yaml
+[11/07 08:13:07] d2.utils.env INFO: Using a generated random seed 7262517
+[11/07 08:13:07] d2.modeling.meta_arch.retinanet WARNING: Shared norm does not work well for BN, SyncBN, expect poor results
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 0
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 128
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 32768
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 0
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 0
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 1
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 1
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 1
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 2
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 65536
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 2
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 2
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 3
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 3
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 3
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 4
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 512
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 131072
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 4
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 4
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 5
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 5
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 5
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 6
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 512
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 1179648
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 6
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 6
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 7
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 7
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 7
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 8
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 3
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 9408
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 8
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 8
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 9
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 64
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 36864
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 9
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 9
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 10
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 64
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 36864
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 10
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 10
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 11
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 64
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 36864
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 11
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 11
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 12
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 64
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 36864
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 12
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 12
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 13
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 64
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 8192
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 13
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 13
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 14
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 64
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 73728
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 14
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 14
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 15
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 128
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 147456
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 15
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 15
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 16
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 128
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 147456
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 16
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 16
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 17
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 128
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 147456
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 17
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 17
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 18
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 128
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 32768
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 18
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 18
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 19
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 128
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 294912
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 19
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 19
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 20
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 20
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 20
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 21
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 21
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 21
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 22
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 22
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 22
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 23
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 131072
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 23
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 23
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 24
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 1179648
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 24
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 24
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 25
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 512
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 2359296
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 25
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 25
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 26
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 512
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 2359296
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 26
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 26
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer backbone, index 27
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 512
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 2359296
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 27
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 27
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 28
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 28
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 28
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 29
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 29
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 29
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 30
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 30
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 30
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 31
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 31
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 31
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 32
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 32
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 32
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 33
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 33
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 33
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 34
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 34
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 34
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: quantize layer head, index 35
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_grad_scale 1.000000, nElements: 256
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(True), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(fm)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(none) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_grad_scale 1.000000, nElements: 589824
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: half_range(False), bit(2), num_levels(4), quant_group(1) boundary(1.0) scale(0.5) ratio(1.0) tag(wt)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: adaptive(var-mean) grad_scale(none) grad_type(none) norm_group(1) progressive(False)
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update fm_index 35
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update wt_index 35
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 0
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 1
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 2
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 3
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 4
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 5
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 6
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 7
+[11/07 08:13:07] d2.layers.wrappers.Quantization INFO: update eltwise_index 8
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: file no exist: 
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: loading 'init' section of policy
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: []
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: file no exist: 
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: loading 'norm' section of policy
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: []
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: file no exist: 
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: loading 'eltwise' section of policy
+[11/07 08:13:07] d2.modeling.meta_arch.build INFO: []
+[11/07 08:13:09] d2.engine.defaults INFO: Model:
+RetinaNet(
+  (backbone): FPN(
+    (fpn_lateral3): Conv2d(
+      128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+      (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (quant_activation): quantization-fm-index(0)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+      (quant_weight): quantization-wt-index(0)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+    )
+    (fpn_output3): Conv2d(
+      256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+      (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (quant_activation): quantization-fm-index(1)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+      (quant_weight): quantization-wt-index(1)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+    )
+    (fpn_lateral4): Conv2d(
+      256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+      (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (quant_activation): quantization-fm-index(2)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+      (quant_weight): quantization-wt-index(2)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+    )
+    (fpn_output4): Conv2d(
+      256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+      (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (quant_activation): quantization-fm-index(3)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+      (quant_weight): quantization-wt-index(3)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+    )
+    (fpn_lateral5): Conv2d(
+      512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+      (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (quant_activation): quantization-fm-index(4)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+      (quant_weight): quantization-wt-index(4)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+    )
+    (fpn_output5): Conv2d(
+      256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+      (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (quant_activation): quantization-fm-index(5)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+      (quant_weight): quantization-wt-index(5)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+    )
+    (top_block): LastLevelP6P7(
+      (p6): Conv2d(
+        512, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (quant_activation): quantization-fm-index(6)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(6)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (p7): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+        (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (quant_activation): quantization-fm-index(7)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(7)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+    )
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (quant_activation): quantization-fm-index(8)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+          (quant_weight): quantization-wt-index(8)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+        )
+      )
+      (res2): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(9)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(9)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(10)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(10)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(11)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(11)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(12)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(12)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+      )
+      (res3): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(13)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(13)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv1): Conv2d(
+            64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(14)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(14)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(15)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(15)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(16)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(16)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(17)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(17)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+      )
+      (res4): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(18)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(18)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv1): Conv2d(
+            128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(19)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(19)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(20)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(20)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(21)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(21)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(22)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(22)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+      )
+      (res5): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(23)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(23)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv1): Conv2d(
+            256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(24)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(24)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(25)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(25)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(26)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(26)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (quant_activation): quantization-fm-index(27)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+            (quant_weight): quantization-wt-index(27)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+          )
+          (add): EltWiseModule()
+        )
+      )
+    )
+    (add): EltWiseModule()
+  )
+  (head): RetinaNetHead(
+    (cls_subnet): Sequential(
+      (0): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(28)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(28)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (1): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): ReLU(inplace=True)
+      (3): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(29)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(29)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (4): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (5): ReLU(inplace=True)
+      (6): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(30)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(30)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (7): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (8): ReLU(inplace=True)
+      (9): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(31)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(31)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (10): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (11): ReLU(inplace=True)
+    )
+    (bbox_subnet): Sequential(
+      (0): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(32)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(32)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (1): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): ReLU(inplace=True)
+      (3): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(33)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(33)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (4): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (5): ReLU(inplace=True)
+      (6): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(34)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(34)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (7): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (8): ReLU(inplace=True)
+      (9): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (quant_activation): quantization-fm-index(35)-enable(True)-method(dorefa)-choice-(lsq)-half_range(True)-bit(2)-quant_group(1)
+        (quant_weight): quantization-wt-index(35)-enable(True)-method(dorefa)-choice-(lsq)-half_range(False)-bit(2)-quant_group(1)
+      )
+      (10): ModuleListDial(
+        (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (4): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (11): ReLU(inplace=True)
+    )
+    (cls_score): Conv2d(256, 720, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bbox_pred): Conv2d(256, 36, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+  (anchor_generator): DefaultAnchorGenerator(
+    (cell_anchors): BufferList()
+  )
+)
+[11/07 08:13:09] fvcore.common.checkpoint INFO: Loading checkpoint from pretrained/retinanet/retinanet_R_18_1x_Full_BN_dorefa_clip_2bit_no_lp_pretrained/model_final.pth
+[11/07 08:13:10] fvcore.common.checkpoint INFO: Some model parameters or buffers are not found in the checkpoint:
+  [34mhead.cls_subnet.4.4.{running_var, running_mean, weight, bias}[0m
+  [34mhead.bbox_subnet.3.quant_weight.{clip_val, iteration, level_num}[0m
+  [34mhead.cls_subnet.1.0.{running_var, bias, running_mean, weight}[0m
+  [34mhead.bbox_subnet.4.2.{running_var, weight, running_mean, bias}[0m
+  [34mbackbone.fpn_output4.quant_weight.{level_num, clip_val, iteration}[0m
+  [34mhead.cls_subnet.7.1.{running_mean, running_var, weight, bias}[0m
+  [34mbackbone.bottom_up.res2.0.conv2.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mhead.bbox_subnet.10.1.{running_mean, running_var, weight, bias}[0m
+  [34mhead.bbox_subnet.4.0.{weight, running_mean, running_var, bias}[0m
+  [34mhead.bbox_subnet.9.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mhead.cls_subnet.7.0.{running_mean, bias, running_var, weight}[0m
+  [34mbackbone.bottom_up.res5.1.conv2.quant_activation.{clip_val, level_num, iteration}[0m
+  [34mhead.cls_subnet.0.quant_weight.{clip_val, level_num, iteration}[0m
+  [34mhead.bbox_subnet.4.3.{running_var, weight, bias, running_mean}[0m
+  [34mhead.bbox_subnet.10.4.{running_mean, running_var, bias, weight}[0m
+  [34mbackbone.bottom_up.res2.1.conv1.quant_activation.{level_num, clip_val, iteration}[0m
+  [34mbackbone.bottom_up.res3.1.conv2.quant_weight.{iteration, clip_val, level_num}[0m
+  [34mhead.bbox_subnet.9.quant_weight.{level_num, iteration, clip_val}[0m
+  [34mbackbone.fpn_output5.quant_activation.{clip_val, level_num, iteration}[0m
+  [34mbackbone.bottom_up.res4.1.conv1.quant_activation.{iteration, level_num, clip_val}[0m
+  [34mbackbone.bottom_up.res5.0.shortcut.quant_weight.{iteration, level_num, clip_val}[0m
+  [34mhead.cls_subnet.9.quant_activation.{iteration, level_num, clip_val}[0m
+  [34mhead.bbox_subnet.1.0.{bias, running_mean, running_var, weight}[0m
+  [34mbackbone.top_block.p6.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mhead.bbox_subnet.4.4.{running_var, running_mean, weight, bias}[0m
+  [34mhead.bbox_subnet.1.1.{running_var, weight, bias, running_mean}[0m
+  [34mhead.cls_subnet.10.2.{weight, running_var, running_mean, bias}[0m
+  [34mhead.bbox_subnet.0.quant_activation.{clip_val, level_num, iteration}[0m
+  [34mbackbone.fpn_lateral4.quant_weight.{level_num, iteration, clip_val}[0m
+  [34mbackbone.bottom_up.res5.0.conv2.quant_weight.{iteration, clip_val, level_num}[0m
+  [34mbackbone.bottom_up.res2.0.conv1.quant_weight.{iteration, clip_val, level_num}[0m
+  [34mbackbone.bottom_up.res5.1.conv1.quant_activation.{level_num, clip_val, iteration}[0m
+  [34mhead.cls_subnet.4.1.{running_mean, running_var, bias, weight}[0m
+  [34mhead.bbox_subnet.10.0.{running_var, bias, running_mean, weight}[0m
+  [34mhead.bbox_subnet.10.3.{weight, running_var, bias, running_mean}[0m
+  [34mbackbone.bottom_up.res3.1.conv1.quant_activation.{clip_val, iteration, level_num}[0m
+  [34mhead.cls_subnet.3.quant_activation.{level_num, clip_val, iteration}[0m
+  [34mhead.cls_subnet.4.0.{weight, bias, running_var, running_mean}[0m
+  [34mbackbone.fpn_lateral3.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mbackbone.top_block.p6.quant_weight.{iteration, clip_val, level_num}[0m
+  [34mbackbone.bottom_up.res4.0.shortcut.quant_activation.{iteration, level_num, clip_val}[0m
+  [34mhead.cls_subnet.6.quant_weight.{level_num, clip_val, iteration}[0m
+  [34mbackbone.bottom_up.res3.0.conv2.quant_weight.{iteration, level_num, clip_val}[0m
+  [34mhead.bbox_subnet.1.3.{bias, running_var, running_mean, weight}[0m
+  [34mhead.cls_subnet.0.quant_activation.{level_num, clip_val, iteration}[0m
+  [34mbackbone.bottom_up.res2.0.conv1.quant_activation.{clip_val, iteration, level_num}[0m
+  [34mbackbone.bottom_up.res3.0.shortcut.quant_activation.{clip_val, level_num, iteration}[0m
+  [34mhead.bbox_subnet.7.1.{running_mean, weight, running_var, bias}[0m
+  [34mbackbone.bottom_up.res4.0.conv2.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mbackbone.bottom_up.res3.0.conv1.quant_activation.{clip_val, iteration, level_num}[0m
+  [34mhead.bbox_subnet.7.0.{running_var, weight, bias, running_mean}[0m
+  [34mhead.bbox_subnet.7.4.{weight, running_var, bias, running_mean}[0m
+  [34mbackbone.bottom_up.res3.1.conv2.quant_activation.{clip_val, iteration, level_num}[0m
+  [34mbackbone.fpn_output5.quant_weight.{clip_val, iteration, level_num}[0m
+  [34mbackbone.bottom_up.res4.1.conv2.quant_activation.{clip_val, iteration, level_num}[0m
+  [34mbackbone.bottom_up.res3.0.shortcut.quant_weight.{level_num, iteration, clip_val}[0m
+  [34mbackbone.bottom_up.res2.1.conv1.quant_weight.{iteration, clip_val, level_num}[0m
+  [34mbackbone.bottom_up.res3.0.conv1.quant_weight.{iteration, level_num, clip_val}[0m
+  [34mhead.cls_subnet.1.2.{weight, bias, running_var, running_mean}[0m
+  [34mhead.cls_subnet.4.3.{bias, running_var, weight, running_mean}[0m
+  [34mhead.cls_subnet.10.0.{running_var, running_mean, bias, weight}[0m
+  [34mhead.cls_subnet.4.2.{weight, running_mean, running_var, bias}[0m
+  [34mbackbone.bottom_up.res5.0.shortcut.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mhead.cls_subnet.1.1.{weight, running_mean, running_var, bias}[0m
+  [34mhead.cls_subnet.3.quant_weight.{level_num, clip_val, iteration}[0m
+  [34mbackbone.fpn_lateral5.quant_weight.{level_num, clip_val, iteration}[0m
+  [34mbackbone.bottom_up.res2.1.conv2.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mbackbone.bottom_up.stem.conv1.quant_weight.{iteration, clip_val, level_num}[0m
+  [34mhead.bbox_subnet.4.1.{weight, running_mean, running_var, bias}[0m
+  [34mhead.cls_subnet.7.4.{bias, weight, running_mean, running_var}[0m
+  [34mbackbone.top_block.p7.quant_activation.{clip_val, level_num, iteration}[0m
+  [34mbackbone.bottom_up.res5.1.conv2.quant_weight.{iteration, level_num, clip_val}[0m
+  [34mbackbone.bottom_up.res4.0.conv2.quant_weight.{clip_val, level_num, iteration}[0m
+  [34mbackbone.bottom_up.res5.0.conv1.quant_weight.{clip_val, level_num, iteration}[0m
+  [34mhead.cls_subnet.7.2.{running_var, running_mean, bias, weight}[0m
+  [34mhead.bbox_subnet.10.2.{running_var, bias, weight, running_mean}[0m
+  [34mhead.cls_subnet.6.quant_activation.{clip_val, iteration, level_num}[0m
+  [34mhead.cls_subnet.10.4.{running_mean, weight, bias, running_var}[0m
+  [34mhead.bbox_subnet.7.3.{running_mean, weight, bias, running_var}[0m
+  [34mhead.cls_subnet.10.1.{running_mean, running_var, weight, bias}[0m
+  [34mbackbone.fpn_output4.quant_activation.{iteration, clip_val, level_num}[0m
+  [34mbackbone.bottom_up.res3.1.conv1.quant_weight.{iteration, level_num, clip_val}[0m
+  [34mbackbone.fpn_output3.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mhead.bbox_subnet.1.4.{bias, weight, running_var, running_mean}[0m
+  [34mbackbone.bottom_up.res4.0.shortcut.quant_weight.{level_num, iteration, clip_val}[0m
+  [34mbackbone.bottom_up.res5.0.conv1.quant_activation.{iteration, clip_val, level_num}[0m
+  [34mhead.cls_subnet.9.quant_weight.{clip_val, iteration, level_num}[0m
+  [34mhead.bbox_subnet.1.2.{running_var, weight, bias, running_mean}[0m
+  [34mbackbone.fpn_lateral4.quant_activation.{iteration, level_num, clip_val}[0m
+  [34mbackbone.fpn_output3.quant_weight.{iteration, clip_val, level_num}[0m
+  [34mbackbone.bottom_up.res3.0.conv2.quant_activation.{level_num, clip_val, iteration}[0m
+  [34mbackbone.bottom_up.res4.0.conv1.quant_activation.{level_num, clip_val, iteration}[0m
+  [34mhead.bbox_subnet.6.quant_activation.{level_num, iteration, clip_val}[0m
+  [34mbackbone.bottom_up.res5.1.conv1.quant_weight.{level_num, iteration, clip_val}[0m
+  [34mhead.bbox_subnet.7.2.{weight, bias, running_var, running_mean}[0m
+  [34mhead.bbox_subnet.3.quant_activation.{clip_val, level_num, iteration}[0m
+  [34mbackbone.bottom_up.res4.1.conv2.quant_weight.{level_num, clip_val, iteration}[0m
+  [34mhead.cls_subnet.10.3.{running_var, running_mean, bias, weight}[0m
+  [34mbackbone.bottom_up.res4.1.conv1.quant_weight.{level_num, clip_val, iteration}[0m
+  [34mbackbone.bottom_up.res2.0.conv2.quant_weight.{iteration, level_num, clip_val}[0m
+  [34mbackbone.fpn_lateral3.quant_weight.{level_num, clip_val, iteration}[0m
+  [34mbackbone.bottom_up.res4.0.conv1.quant_weight.{iteration, level_num, clip_val}[0m
+  [34mhead.bbox_subnet.0.quant_weight.{clip_val, level_num, iteration}[0m
+  [34mbackbone.bottom_up.res2.1.conv2.quant_weight.{clip_val, iteration, level_num}[0m
+  [34mbackbone.top_block.p7.quant_weight.{level_num, iteration, clip_val}[0m
+  [34mhead.cls_subnet.7.3.{running_var, bias, weight, running_mean}[0m
+  [34mhead.cls_subnet.1.4.{running_var, weight, running_mean, bias}[0m
+  [34mbackbone.fpn_lateral5.quant_activation.{clip_val, level_num, iteration}[0m
+  [34mbackbone.bottom_up.stem.conv1.quant_activation.{level_num, clip_val, iteration}[0m
+  [34mhead.cls_subnet.1.3.{bias, running_mean, running_var, weight}[0m
+  [34mhead.bbox_subnet.6.quant_weight.{clip_val, iteration, level_num}[0m
+  [34mbackbone.bottom_up.res5.0.conv2.quant_activation.{clip_val, level_num, iteration}[0m
+[11/07 08:13:10] fvcore.common.checkpoint INFO: The checkpoint state_dict contains keys that are not used by the model:
+  [35mbackbone.fpn_lateral3.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.fpn_output3.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.fpn_lateral4.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.fpn_output4.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.fpn_lateral5.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.fpn_output5.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.top_block.p6.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.top_block.p7.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res2.0.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res2.0.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res2.1.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res2.1.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res3.0.shortcut.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res3.0.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res3.0.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res3.1.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res3.1.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res4.0.shortcut.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res4.0.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res4.0.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res4.1.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res4.1.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res5.0.shortcut.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res5.0.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res5.0.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res5.1.conv1.{weight_clip_value, activation_clip_value}[0m
+  [35mbackbone.bottom_up.res5.1.conv2.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.cls_norm0.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm0.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm0.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm0.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm0.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm0.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm0.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm0.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm0.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm0.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm1.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm1.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm1.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm1.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm1.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm1.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm1.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm1.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm1.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm1.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm2.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm2.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm2.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm2.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm2.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm2.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm2.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm2.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm2.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm2.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm3.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm3.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm3.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm3.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_norm3.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm3.0.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm3.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm3.2.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm3.3.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_norm3.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_subnet.0.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.cls_subnet.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_subnet.3.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.cls_subnet.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_subnet.6.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.cls_subnet.7.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.cls_subnet.9.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.cls_subnet.10.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_subnet.0.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.bbox_subnet.1.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_subnet.3.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.bbox_subnet.4.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_subnet.6.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.bbox_subnet.7.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+  [35mhead.bbox_subnet.9.{weight_clip_value, activation_clip_value}[0m
+  [35mhead.bbox_subnet.10.{weight, bias, running_mean, running_var, num_batches_tracked}[0m
+[11/07 08:13:10] d2.data.datasets.coco INFO: Enter load_coco_json to read datasets/coco/annotations/instances_val2017.json
+[11/07 08:13:10] d2.data.datasets.coco INFO: Loading datasets/coco/annotations/instances_val2017.json takes 0.50 seconds.
+[11/07 08:13:10] d2.data.datasets.coco INFO: Loaded 5000 images in COCO format from datasets/coco/annotations/instances_val2017.json
+[11/07 08:13:11] d2.data.build INFO: Distribution of instances among all 80 categories:
+[36m|   category    | #instances   |   category   | #instances   |   category    | #instances   |
+|:-------------:|:-------------|:------------:|:-------------|:-------------:|:-------------|
+|    person     | 10777        |   bicycle    | 314          |      car      | 1918         |
+|  motorcycle   | 367          |   airplane   | 143          |      bus      | 283          |
+|     train     | 190          |    truck     | 414          |     boat      | 424          |
+| traffic light | 634          | fire hydrant | 101          |   stop sign   | 75           |
+| parking meter | 60           |    bench     | 411          |     bird      | 427          |
+|      cat      | 202          |     dog      | 218          |     horse     | 272          |
+|     sheep     | 354          |     cow      | 372          |   elephant    | 252          |
+|     bear      | 71           |    zebra     | 266          |    giraffe    | 232          |
+|   backpack    | 371          |   umbrella   | 407          |    handbag    | 540          |
+|      tie      | 252          |   suitcase   | 299          |    frisbee    | 115          |
+|     skis      | 241          |  snowboard   | 69           |  sports ball  | 260          |
+|     kite      | 327          | baseball bat | 145          | baseball gl.. | 148          |
+|  skateboard   | 179          |  surfboard   | 267          | tennis racket | 225          |
+|    bottle     | 1013         |  wine glass  | 341          |      cup      | 895          |
+|     fork      | 215          |    knife     | 325          |     spoon     | 253          |
+|     bowl      | 623          |    banana    | 370          |     apple     | 236          |
+|   sandwich    | 177          |    orange    | 285          |   broccoli    | 312          |
+|    carrot     | 365          |   hot dog    | 125          |     pizza     | 284          |
+|     donut     | 328          |     cake     | 310          |     chair     | 1771         |
+|     couch     | 261          | potted plant | 342          |      bed      | 163          |
+| dining table  | 695          |    toilet    | 179          |      tv       | 288          |
+|    laptop     | 231          |    mouse     | 106          |    remote     | 283          |
+|   keyboard    | 153          |  cell phone  | 262          |   microwave   | 55           |
+|     oven      | 143          |   toaster    | 9            |     sink      | 225          |
+| refrigerator  | 126          |     book     | 1129         |     clock     | 267          |
+|     vase      | 274          |   scissors   | 36           |  teddy bear   | 190          |
+|  hair drier   | 11           |  toothbrush  | 57           |               |              |
+|     total     | 36335        |              |              |               |              |[0m
+[11/07 08:13:11] d2.data.common INFO: Serializing 5000 elements to byte tensors and concatenating them all ...
+[11/07 08:13:11] d2.data.common INFO: Serialized dataset takes 19.10 MiB
+[11/07 08:13:11] d2.data.dataset_mapper INFO: Augmentations used in training: [ResizeShortestEdge(short_edge_length=(800, 800), max_size=1333, sample_style='choice')]
+[11/07 08:13:11] d2.evaluation.evaluator INFO: Start inference on 5000 images
+[11/07 08:13:14] d2.evaluation.evaluator INFO: Inference done 11/5000. 0.1734 s / img. ETA=0:14:28
+[11/07 08:13:19] d2.evaluation.evaluator INFO: Inference done 39/5000. 0.1776 s / img. ETA=0:14:46
+[11/07 08:13:24] d2.evaluation.evaluator INFO: Inference done 67/5000. 0.1800 s / img. ETA=0:14:54
+[11/07 08:13:29] d2.evaluation.evaluator INFO: Inference done 97/5000. 0.1771 s / img. ETA=0:14:34
+[11/07 08:13:34] d2.evaluation.evaluator INFO: Inference done 125/5000. 0.1774 s / img. ETA=0:14:30
