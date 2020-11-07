@@ -74,14 +74,14 @@
   head.bbox_norm3.3.{weight, bias, running_mean, running_var, num_batches_tracked}
   head.bbox_norm3.4.{weight, bias, running_mean, running_var, num_batches_tracked}
 
-  head.bbox_subnet.0.{activation_clip_value
-  head.bbox_subnet.0.{weight_clip_value}
-  head.bbox_subnet.3.{activation_clip_value 
-  head.bbox_subnet.3.{weight_clip_value}
-  head.bbox_subnet.6.{activation_clip_value 
-  head.bbox_subnet.6.{weight_clip_value}
-  head.bbox_subnet.9.{activation_clip_value
-  head.bbox_subnet.9.{weight_clip_value
+  head.bbox_subnet.0.activation_clip_value
+  head.bbox_subnet.0.weight_clip_value}
+  head.bbox_subnet.3.activation_clip_value 
+  head.bbox_subnet.3.weight_clip_value}
+  head.bbox_subnet.6.activation_clip_value 
+  head.bbox_subnet.6.weight_clip_value}
+  head.bbox_subnet.9.activation_clip_value
+  head.bbox_subnet.9.weight_clip_value
 
   head.cls_norm0.0.{weight, bias, running_mean, running_var, num_batches_tracked}
   head.cls_norm0.1.{weight, bias, running_mean, running_var, num_batches_tracked}
@@ -122,3 +122,12 @@
   #head.cls_subnet.4.{weight, bias, running_mean, running_var, num_batches_tracked}
   #head.cls_subnet.7.{weight, bias, running_mean, running_var, num_batches_tracked}
   #head.cls_subnet.10.{weight, bias, running_mean, running_var, num_batches_tracked}
+
+  backbone.fpn_lateral3.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_lateral4.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_lateral5.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_output3.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_output4.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_output5.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.top_block.p6.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.top_block.p7.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
