@@ -1,0 +1,8 @@
+  backbone.fpn_lateral3.norm.0.{running_mean, weight, running_var, bias}
+  backbone.fpn_lateral4.norm.0.{weight, bias, running_var, running_mean}
+  backbone.fpn_lateral5.norm.0.{weight, running_var, bias, running_mean}
+  backbone.fpn_output3.norm.0.{running_var, running_mean, bias, weight}
+  backbone.fpn_output4.norm.0.{bias, running_mean, weight, running_var}
+  backbone.fpn_output5.norm.0.{weight, bias, running_mean, running_var}
+  backbone.top_block.p6.norm.0.{weight, bias, running_var, running_mean}
+  backbone.top_block.p7.norm.0.{running_var, weight, bias, running_mean}

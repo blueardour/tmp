@@ -1,0 +1,8 @@
+  backbone.fpn_lateral3.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_lateral4.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_lateral5.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_output3.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_output4.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.fpn_output5.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.top_block.p6.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
+  backbone.top_block.p7.norm.{weight, bias, running_mean, running_var, num_batches_tracked}
