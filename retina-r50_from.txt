@@ -1,0 +1,116 @@
+  backbone.fpn_lateral3.{weight_clip_value, activation_clip_value}
+  backbone.fpn_output3.{weight_clip_value, activation_clip_value}
+  backbone.fpn_lateral4.{weight_clip_value, activation_clip_value}
+  backbone.fpn_output4.{weight_clip_value, activation_clip_value}
+  backbone.fpn_lateral5.{weight_clip_value, activation_clip_value}
+  backbone.fpn_output5.{weight_clip_value, activation_clip_value}
+  backbone.top_block.p6.{weight_clip_value, activation_clip_value}
+  backbone.top_block.p7.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.0.shortcut.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.0.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.0.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.0.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.1.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.1.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.1.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.2.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.2.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res2.2.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.0.shortcut.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.0.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.0.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.0.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.1.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.1.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.1.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.2.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.2.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.2.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.3.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.3.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res3.3.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.0.shortcut.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.0.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.0.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.0.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.1.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.1.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.1.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.2.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.2.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.2.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.3.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.3.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.3.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.4.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.4.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.4.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.5.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.5.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res4.5.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.0.shortcut.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.0.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.0.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.0.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.1.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.1.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.1.conv3.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.2.conv1.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.2.conv2.{weight_clip_value, activation_clip_value}
+  backbone.bottom_up.res5.2.conv3.{weight_clip_value, activation_clip_value}
+  head.cls_norm0.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm0.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm0.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm0.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm0.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm0.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm0.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm0.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm0.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm0.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm1.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm1.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm1.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm1.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm1.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm1.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm1.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm1.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm1.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm1.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm2.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm2.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm2.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm2.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm2.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm2.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm2.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm2.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm2.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm2.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm3.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm3.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm3.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm3.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_norm3.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm3.0.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm3.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm3.2.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm3.3.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_norm3.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_subnet.0.{weight_clip_value, activation_clip_value}
+  head.cls_subnet.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_subnet.3.{weight_clip_value, activation_clip_value}
+  head.cls_subnet.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_subnet.6.{weight_clip_value, activation_clip_value}
+  head.cls_subnet.7.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.cls_subnet.9.{weight_clip_value, activation_clip_value}
+  head.cls_subnet.10.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_subnet.0.{weight_clip_value, activation_clip_value}
+  head.bbox_subnet.1.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_subnet.3.{weight_clip_value, activation_clip_value}
+  head.bbox_subnet.4.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_subnet.6.{weight_clip_value, activation_clip_value}
+  head.bbox_subnet.7.{weight, bias, running_mean, running_var, num_batches_tracked}
+  head.bbox_subnet.9.{weight_clip_value, activation_clip_value}
+  head.bbox_subnet.10.{weight, bias, running_mean, running_var, num_batches_tracked}
