@@ -1,0 +1,94 @@
+
+[11/15 16:51:59] fvcore.common.checkpoint INFO: Some model parameters or buffers are not found in the checkpoint:
+  backbone.bottom_up.res5.0.shortcut.quant_weight.{level_num, iteration, clip_val}
+  backbone.top_block.p6.norm.0.{running_mean, bias, weight, running_var}
+  backbone.fpn_lateral5.norm.0.{running_var, bias, running_mean, weight}
+  backbone.bottom_up.res4.1.conv1.quant_weight.{level_num, clip_val, iteration}
+  backbone.fpn_output4.norm.0.{weight, running_var, running_mean, bias}
+  backbone.bottom_up.res4.1.conv2.quant_weight.{level_num, iteration, clip_val}
+  proposal_generator.fcos_head.bbox_tower.0.quant_weight.{iteration, clip_val, level_num}
+  backbone.bottom_up.res2.0.conv1.quant_activation.{iteration, clip_val, level_num}
+  proposal_generator.fcos_head.cls_tower.9.quant_weight.{level_num, clip_val, iteration}
+  backbone.bottom_up.res2.0.conv2.quant_weight.{clip_val, iteration, level_num}
+  backbone.bottom_up.res5.0.conv1.quant_weight.{clip_val, iteration, level_num}
+  proposal_generator.fcos_head.bbox_tower.6.quant_activation.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.cls_tower.3.quant_activation.{iteration, clip_val, level_num}
+  backbone.fpn_lateral4.norm.0.{bias, weight, running_mean, running_var}
+  backbone.bottom_up.res5.0.conv1.quant_activation.{clip_val, level_num, iteration}
+  backbone.bottom_up.res5.1.conv1.quant_activation.{clip_val, level_num, iteration}
+  backbone.fpn_output3.quant_weight.{iteration, level_num, clip_val}
+  backbone.bottom_up.res2.1.conv1.quant_weight.{level_num, iteration, clip_val}
+  proposal_generator.fcos_head.cls_tower.0.quant_activation.{iteration, clip_val, level_num}
+  proposal_generator.fcos_head.cls_logits.quant_activation.{level_num, clip_val, iteration}
+  backbone.bottom_up.res4.1.conv2.quant_activation.{clip_val, iteration, level_num}
+  backbone.fpn_output3.quant_activation.{iteration, clip_val, level_num}
+  backbone.bottom_up.res3.1.conv2.quant_activation.{level_num, iteration, clip_val}
+  proposal_generator.fcos_head.cls_tower.6.quant_activation.{clip_val, iteration, level_num}
+  backbone.top_block.p7.norm.0.{running_var, running_mean, bias, weight}
+  backbone.bottom_up.res4.0.conv1.quant_weight.{clip_val, iteration, level_num}
+  backbone.bottom_up.stem.conv1.quant_activation.{level_num, clip_val, iteration}
+  backbone.top_block.p7.quant_activation.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.ctrness.quant_weight.{clip_val, iteration, level_num}
+  backbone.fpn_lateral3.norm.0.{running_mean, running_var, bias, weight}
+  backbone.bottom_up.res2.0.conv2.quant_activation.{iteration, clip_val, level_num}
+  backbone.bottom_up.res3.0.shortcut.quant_activation.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.scales.1.scale
+  proposal_generator.fcos_head.scales.3.scale
+  backbone.fpn_lateral4.quant_activation.{iteration, clip_val, level_num}
+  backbone.bottom_up.res3.0.conv1.quant_weight.{level_num, iteration, clip_val}
+  backbone.bottom_up.res5.0.conv2.quant_weight.{iteration, level_num, clip_val}
+  backbone.fpn_output5.norm.0.{running_mean, weight, running_var, bias}
+  proposal_generator.fcos_head.bbox_tower.3.quant_activation.{level_num, clip_val, iteration}
+  proposal_generator.fcos_head.ctrness.{weight, bias}
+  backbone.bottom_up.res5.1.conv2.quant_weight.{iteration, level_num, clip_val}
+  backbone.top_block.p7.quant_weight.{iteration, clip_val, level_num}
+  backbone.fpn_lateral3.quant_activation.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.bbox_tower.9.quant_weight.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.bbox_tower.9.quant_activation.{level_num, clip_val, iteration}
+  proposal_generator.fcos_head.bbox_tower.0.quant_activation.{clip_val, level_num, iteration}
+  backbone.bottom_up.res2.1.conv2.quant_weight.{iteration, clip_val, level_num}
+  backbone.bottom_up.res3.1.conv1.quant_activation.{level_num, iteration, clip_val}
+  backbone.bottom_up.res5.0.conv2.quant_activation.{iteration, clip_val, level_num}
+  backbone.top_block.p6.quant_weight.{level_num, iteration, clip_val}
+  backbone.bottom_up.res3.0.conv2.quant_weight.{clip_val, iteration, level_num}
+  backbone.bottom_up.res2.0.conv1.quant_weight.{level_num, clip_val, iteration}
+  backbone.bottom_up.res4.0.conv1.quant_activation.{iteration, level_num, clip_val}
+  backbone.bottom_up.res3.1.conv2.quant_weight.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.cls_logits.quant_weight.{level_num, clip_val, iteration}
+  proposal_generator.fcos_head.cls_tower.6.quant_weight.{iteration, level_num, clip_val}
+  backbone.bottom_up.res5.1.conv1.quant_weight.{level_num, iteration, clip_val}
+  proposal_generator.fcos_head.bbox_pred.quant_weight.{iteration, clip_val, level_num}
+  backbone.bottom_up.res4.0.conv2.quant_activation.{clip_val, iteration, level_num}
+  proposal_generator.fcos_head.bbox_tower.3.quant_weight.{clip_val, iteration, level_num}
+  proposal_generator.fcos_head.ctrness.quant_activation.{clip_val, level_num, iteration}
+  backbone.fpn_lateral4.quant_weight.{clip_val, iteration, level_num}
+  backbone.bottom_up.stem.conv1.quant_weight.{level_num, clip_val, iteration}
+  backbone.bottom_up.res5.0.shortcut.quant_activation.{iteration, level_num, clip_val}
+  backbone.bottom_up.res4.0.shortcut.quant_weight.{iteration, clip_val, level_num}
+  proposal_generator.fcos_head.cls_tower.3.quant_weight.{level_num, iteration, clip_val}
+  backbone.fpn_output4.quant_weight.{iteration, level_num, clip_val}
+  backbone.top_block.p6.quant_activation.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.bbox_tower.6.quant_weight.{level_num, iteration, clip_val}
+  backbone.fpn_output5.quant_activation.{clip_val, iteration, level_num}
+  proposal_generator.fcos_head.scales.4.scale
+  backbone.bottom_up.res4.1.conv1.quant_activation.{level_num, clip_val, iteration}
+  backbone.bottom_up.res4.0.conv2.quant_weight.{level_num, clip_val, iteration}
+  backbone.bottom_up.res3.0.conv1.quant_activation.{clip_val, iteration, level_num}
+  backbone.fpn_output3.norm.0.{weight, running_var, bias, running_mean}
+  backbone.bottom_up.res5.1.conv2.quant_activation.{iteration, clip_val, level_num}
+  proposal_generator.fcos_head.scales.2.scale
+  backbone.bottom_up.res4.0.shortcut.quant_activation.{level_num, iteration, clip_val}
+  backbone.bottom_up.res2.1.conv1.quant_activation.{clip_val, iteration, level_num}
+  proposal_generator.fcos_head.bbox_pred.quant_activation.{level_num, iteration, clip_val}
+  backbone.fpn_output5.quant_weight.{clip_val, level_num, iteration}
+  backbone.bottom_up.res2.1.conv2.quant_activation.{level_num, clip_val, iteration}
+  backbone.fpn_lateral5.quant_weight.{level_num, iteration, clip_val}
+  backbone.fpn_lateral5.quant_activation.{level_num, clip_val, iteration}
+  backbone.bottom_up.res3.1.conv1.quant_weight.{clip_val, iteration, level_num}
+  backbone.fpn_lateral3.quant_weight.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.cls_tower.0.quant_weight.{clip_val, iteration, level_num}
+  backbone.bottom_up.res3.0.shortcut.quant_weight.{level_num, clip_val, iteration}
+  backbone.fpn_output4.quant_activation.{level_num, clip_val, iteration}
+  backbone.bottom_up.res3.0.conv2.quant_activation.{iteration, level_num, clip_val}
+  proposal_generator.fcos_head.scales.0.scale
+  proposal_generator.fcos_head.cls_tower.9.quant_activation.{iteration, level_num, clip_val}
