@@ -1,0 +1,142 @@
+  backbone.bottom_up.res2.0.conv1.quant_activation.{, clip_val, }
+  backbone.bottom_up.res2.0.conv1.quant_weight.{, clip_val, }
+  backbone.bottom_up.res2.0.conv2.quant_activation.{, clip_val, }
+  backbone.bottom_up.res2.0.conv2.quant_weight.{clip_val, , }
+  backbone.bottom_up.res2.1.conv1.quant_activation.{clip_val, , }
+  backbone.bottom_up.res2.1.conv1.quant_weight.{, , clip_val}
+  backbone.bottom_up.res2.1.conv2.quant_activation.{, clip_val, }
+  backbone.bottom_up.res2.1.conv2.quant_weight.{, clip_val, }
+  backbone.bottom_up.res3.0.conv1.quant_activation.{clip_val, , }
+  backbone.bottom_up.res3.0.conv1.quant_weight.{, , clip_val}
+  backbone.bottom_up.res3.0.conv2.quant_activation.{, , clip_val}
+  backbone.bottom_up.res3.0.conv2.quant_weight.{clip_val, , }
+  backbone.bottom_up.res3.0.shortcut.quant_activation.{, , clip_val}
+  backbone.bottom_up.res3.0.shortcut.quant_weight.{, clip_val, }
+  backbone.bottom_up.res3.1.conv1.quant_activation.{, , clip_val}
+  backbone.bottom_up.res3.1.conv1.quant_weight.{clip_val, , }
+  backbone.bottom_up.res3.1.conv2.quant_activation.{, , clip_val}
+  backbone.bottom_up.res3.1.conv2.quant_weight.{, , clip_val}
+  backbone.bottom_up.res4.0.conv1.quant_activation.{, , clip_val}
+  backbone.bottom_up.res4.0.conv1.quant_weight.{clip_val, , }
+  backbone.bottom_up.res4.0.conv2.quant_activation.{clip_val, , }
+  backbone.bottom_up.res4.0.conv2.quant_weight.{, clip_val, }
+  backbone.bottom_up.res4.0.shortcut.quant_activation.{, , clip_val}
+  backbone.bottom_up.res4.0.shortcut.quant_weight.{, clip_val, }
+  backbone.bottom_up.res4.1.conv1.quant_activation.{, clip_val, }
+  backbone.bottom_up.res4.1.conv1.quant_weight.{, clip_val, }
+  backbone.bottom_up.res4.1.conv2.quant_activation.{clip_val, , }
+  backbone.bottom_up.res4.1.conv2.quant_weight.{, , clip_val}
+  backbone.bottom_up.res5.0.conv1.quant_activation.{clip_val, , }
+  backbone.bottom_up.res5.0.conv1.quant_weight.{clip_val, , }
+  backbone.bottom_up.res5.0.conv2.quant_activation.{, clip_val, }
+  backbone.bottom_up.res5.0.conv2.quant_weight.{, , clip_val}
+  backbone.bottom_up.res5.0.shortcut.quant_activation.{, , clip_val}
+  backbone.bottom_up.res5.0.shortcut.quant_weight.{, , clip_val}
+  backbone.bottom_up.res5.1.conv1.quant_activation.{clip_val, , }
+  backbone.bottom_up.res5.1.conv1.quant_weight.{, , clip_val}
+  backbone.bottom_up.res5.1.conv2.quant_activation.{, clip_val, }
+  backbone.bottom_up.res5.1.conv2.quant_weight.{, , clip_val}
+
+  backbone.fpn_lateral3.norm.0.{running_mean, running_var, bias, weight}
+  backbone.fpn_lateral3.quant_activation.{, , clip_val}
+  backbone.fpn_lateral3.quant_weight.{, , clip_val}
+  backbone.fpn_lateral4.norm.0.{bias, weight, running_mean, running_var}
+  backbone.fpn_lateral4.quant_activation.{, clip_val, }
+  backbone.fpn_lateral4.quant_weight.{clip_val, , }
+  backbone.fpn_lateral5.norm.0.{running_var, bias, running_mean, weight}
+  backbone.fpn_lateral5.quant_activation.{, clip_val, }
+  backbone.fpn_lateral5.quant_weight.{, , clip_val}
+  backbone.fpn_output3.norm.0.{weight, running_var, bias, running_mean}
+  backbone.fpn_output3.quant_activation.{, clip_val, }
+  backbone.fpn_output3.quant_weight.{, , clip_val}
+  backbone.fpn_output4.norm.0.{weight, running_var, running_mean, bias}
+  backbone.fpn_output4.quant_activation.{, clip_val, }
+  backbone.fpn_output4.quant_weight.{, , clip_val}
+  backbone.fpn_output5.norm.0.{running_mean, weight, running_var, bias}
+  backbone.fpn_output5.quant_activation.{clip_val, , }
+  backbone.fpn_output5.quant_weight.{clip_val, , }
+  backbone.top_block.p6.norm.0.{running_mean, bias, weight, running_var}
+  backbone.top_block.p6.quant_activation.{, , clip_val}
+  backbone.top_block.p6.quant_weight.{, , clip_val}
+  backbone.top_block.p7.norm.0.{running_var, running_mean, bias, weight}
+  backbone.top_block.p7.quant_activation.{, , clip_val}
+  backbone.top_block.p7.quant_weight.{, clip_val, }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  proposal_generator.fcos_head.bbox_tower.0.quant_activation.{clip_val, , }
+  proposal_generator.fcos_head.bbox_tower.0.quant_weight.{, clip_val, }
+  proposal_generator.fcos_head.bbox_tower.3.quant_activation.{, clip_val, }
+  proposal_generator.fcos_head.bbox_tower.3.quant_weight.{clip_val, , }
+  proposal_generator.fcos_head.bbox_tower.6.quant_activation.{, , clip_val}
+  proposal_generator.fcos_head.bbox_tower.6.quant_weight.{, , clip_val}
+  proposal_generator.fcos_head.bbox_tower.9.quant_activation.{, clip_val, }
+  proposal_generator.fcos_head.bbox_tower.9.quant_weight.{, , clip_val}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  proposal_generator.fcos_head.cls_tower.0.quant_activation.{, clip_val, }
+  proposal_generator.fcos_head.cls_tower.0.quant_weight.{clip_val, , }
+  proposal_generator.fcos_head.cls_tower.3.quant_activation.{, clip_val, }
+  proposal_generator.fcos_head.cls_tower.3.quant_weight.{, , clip_val}
+  proposal_generator.fcos_head.cls_tower.6.quant_activation.{clip_val, , }
+  proposal_generator.fcos_head.cls_tower.6.quant_weight.{, , clip_val}
+  proposal_generator.fcos_head.cls_tower.9.quant_activation.{, , clip_val}
+  proposal_generator.fcos_head.cls_tower.9.quant_weight.{, clip_val, }
+
+  proposal_generator.fcos_head.ctrness.{weight, bias}
+
+  #proposal_generator.fcos_head.scales.0.scale
+  #proposal_generator.fcos_head.scales.1.scale
+  #proposal_generator.fcos_head.scales.2.scale
+  #proposal_generator.fcos_head.scales.3.scale
+  #proposal_generator.fcos_head.scales.4.scale
